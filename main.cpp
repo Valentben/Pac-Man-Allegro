@@ -4,6 +4,7 @@
 
 BITMAP *buffer;
 BITMAP *roca;
+BITMAP *coin;
 
 
 char mapa[MAXFILAS][MAXCOLS] = {
@@ -25,7 +26,7 @@ char mapa[MAXFILAS][MAXCOLS] = {
   "XoXXX| o| o o o o o |o |XXXoX",
   "X XXXoXXXX XXXXXXXX XXX XXX X",
   "XoXXXoXXXX          XXX XXXoX",
-  "X  o |o o  XXXXXXXX o o| o  X",
+  "X  o |o o  XXXXXXXX  o| o  X",
   "XXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
 };
 
@@ -36,9 +37,13 @@ void dibujar_mapa(){
 		for(col = 0; col < MAXCOLS; col++){
 			if(mapa[row][col] == 'X'){
 				draw_sprite(buffer, roca, col*30, row*30);	
-			};	
+			};
+			if(mapa[row][col] == 'o'){
+				draw_sprite(buffer, coin, col*30, row*30);
+			};
 		};	
 	};
+
 };
 
 void pantalla(){
@@ -54,6 +59,7 @@ int main() {
 	
 	buffer = create_bitmap(880,600);
 	roca = load_bitmap("roca.bmp",NULL);
+	coin = load_bitmap("Comida.bmp",NULL);
 	
 	while(!key[KEY_ESC]){
 		dibujar_mapa();
